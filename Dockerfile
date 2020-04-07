@@ -19,7 +19,6 @@ RUN apt-get update -qq
 # executable JS is required, specifying explicitly node version 11.5.4
 RUN apt-get -y install curl gnupg apt-utils
 RUN curl -sL https://deb.nodesource.com/setup_11.5.4  | bash -
-RUN apt-get -y install nodejs
-RUN npm install
+RUN apt-get -y install nodejs && nodejs -v
 
 ENTRYPOINT [ "/bin/bash" ]
