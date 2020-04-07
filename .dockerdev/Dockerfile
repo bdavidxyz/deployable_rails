@@ -61,6 +61,8 @@ RUN gem update --system && \
     gem uninstall bundler && \
     gem install bundler -v $BUNDLER_VERSION
 
+RUN gem install rails -v 6.0.2.2
+
 # Create a directory for the app code
 RUN mkdir -p /myapp
 
