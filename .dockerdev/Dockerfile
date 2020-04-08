@@ -1,7 +1,6 @@
 ARG RUBY_VERSION
 FROM ruby:$RUBY_VERSION-slim-buster
 
-ARG RAILS_VERSION
 ARG PG_MAJOR
 ARG NODE_MAJOR
 ARG BUNDLER_VERSION
@@ -51,15 +50,12 @@ ENV LANG=C.UTF-8 \
   BUNDLE_JOBS=4 \
   BUNDLE_RETRY=3
 
-# specific version of Rails, do not works...
-# RUN gem install rails -v $RAILS_VERSION
-
 # Upgrade RubyGems and install required Bundler version
 # See https://github.com/evilmartians/terraforming-rails/pull/24 for discussion
-# RUN gem update --system && \
-#     rm /usr/local/lib/ruby/gems/*/specifications/default/bundler-*.gemspec && \
-#     gem uninstall bundler && \
-#     gem install bundler -v $BUNDLER_VERSION
+RUN gem update --system && \
+    rm /usr/local/lib/ruby/gems/*/specifications/default/bundler-*.gemspec && \
+    gem uninstall bundler && \
+    gem install bundler -v $BUNDLER_VERSION
 
 
 # Create a directory for the app code
