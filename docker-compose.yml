@@ -6,11 +6,11 @@ services:
       context: .
       dockerfile: ./.dockerdev/Dockerfile
       args:
-        RUBY_VERSION: '2.7.1'
+        RUBY_VERSION: '2.6.6'
         PG_MAJOR: '12'
         NODE_MAJOR: '12'
         YARN_VERSION: '1.22.4'
-        BUNDLER_VERSION: '2.0.2'
+        BUNDLER_VERSION: '1.17.3'
     image: railz:0.0.4
     tmpfs:
       - /tmp
