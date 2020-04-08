@@ -243,3 +243,6 @@ build-iPhoneSimulator/
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 
 # End of https://www.gitignore.io/api/node,ruby,rails,linux,macos
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
