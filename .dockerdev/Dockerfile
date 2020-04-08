@@ -7,6 +7,7 @@ ARG NODE_MAJOR
 ARG BUNDLER_VERSION
 ARG YARN_VERSION
 
+
 # Common dependencies
 RUN apt-get update -qq \
   && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
@@ -19,6 +20,7 @@ RUN apt-get update -qq \
   && rm -rf /var/cache/apt/archives/* \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && truncate -s 0 /var/log/*log
+
 
 # Add PostgreSQL to sources list
 RUN curl -sSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
@@ -53,7 +55,7 @@ ENV LANG=C.UTF-8 \
 # specific version of bundler
 RUN gem install bundler -v $BUNDLER_VERSION
 
-# specific version of Rails, do not works...
+# TODO : do not works, I don't know why. Rails is shown as uninstalled in the bash
 # RUN gem install rails -v $RAILS_VERSION
 
 # Create a directory for the app code
