@@ -7,7 +7,6 @@ ARG NODE_MAJOR
 ARG BUNDLER_VERSION
 ARG YARN_VERSION
 
-
 # Common dependencies
 RUN apt-get update -qq \
   && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
@@ -20,7 +19,6 @@ RUN apt-get update -qq \
   && rm -rf /var/cache/apt/archives/* \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && truncate -s 0 /var/log/*log
-
 
 # Add PostgreSQL to sources list
 RUN curl -sSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
@@ -41,6 +39,7 @@ RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrad
     postgresql-client-$PG_MAJOR \
     nodejs \
     sqlite3 \
+    libsqlite3-dev \
     yarn=$YARN_VERSION-1 \
     $(cat /tmp/Aptfile | xargs) && \
     apt-get clean && \
@@ -52,11 +51,16 @@ ENV LANG=C.UTF-8 \
   BUNDLE_JOBS=4 \
   BUNDLE_RETRY=3
 
-# specific version of bundler
-RUN gem install bundler -v $BUNDLER_VERSION
-
-# TODO : do not works, I don't know why. Rails is shown as uninstalled in the bash
+# specific version of Rails, do not works...
 # RUN gem install rails -v $RAILS_VERSION
+
+# Upgrade RubyGems and install required Bundler version
+# See https://github.com/evilmartians/terraforming-rails/pull/24 for discussion
+RUN gem update --system && \
+    rm /usr/local/lib/ruby/gems/*/specifications/default/bundler-*.gemspec && \
+    gem uninstall bundler && \
+    gem install bundler -v $BUNDLER_VERSION
+
 
 # Create a directory for the app code
 RUN mkdir -p /myapp
