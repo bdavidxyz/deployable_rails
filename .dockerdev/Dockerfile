@@ -52,11 +52,12 @@ ENV LANG=C.UTF-8 \
 
 # Upgrade RubyGems and install required Bundler version
 # See https://github.com/evilmartians/terraforming-rails/pull/24 for discussion
-RUN gem update --system && \
+RUN bundler -v && \
+    gem update --system && \
     rm /usr/local/lib/ruby/gems/*/specifications/default/bundler-*.gemspec && \
     gem uninstall bundler && \
-    gem install bundler -v $BUNDLER_VERSION
-
+    gem install bundler -v $BUNDLER_VERSION && \
+    bundler -v
 
 # Create a directory for the app code
 RUN mkdir -p /myapp
