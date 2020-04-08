@@ -7,11 +7,11 @@ services:
       dockerfile: ./.dockerdev/Dockerfile
       args:
         RUBY_VERSION: '2.6.6'
+        BUNDLER_VERSION: '1.17.3'
         PG_MAJOR: '12'
         NODE_MAJOR: '12'
         YARN_VERSION: '1.22.4'
-        BUNDLER_VERSION: '1.17.3'
-    image: railz:0.0.4
+    image: railz:0.0.28
     tmpfs:
       - /tmp
 

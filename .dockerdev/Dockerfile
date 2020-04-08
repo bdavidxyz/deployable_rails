@@ -46,18 +46,22 @@ RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrad
     truncate -s 0 /var/log/*log
 
 # Configure bundler
-ENV LANG=C.UTF-8 \
-  BUNDLE_JOBS=4 \
-  BUNDLE_RETRY=3
+# ENV LANG=C.UTF-8 \
+#   BUNDLE_JOBS=4 \
+#   BUNDLE_RETRY=3
+
+# Uncomment this line if you store Bundler settings in the project's root
+# ENV BUNDLE_APP_CONFIG=.bundle
+
+# Uncomment this line if you want to run binstubs without prefixing with `bin/` or `bundle exec`
+# ENV PATH /app/bin:$PATH
 
 # Upgrade RubyGems and install required Bundler version
 # See https://github.com/evilmartians/terraforming-rails/pull/24 for discussion
-RUN bundler -v && \
-    gem update --system && \
+RUN gem update --system  && \
     rm /usr/local/lib/ruby/gems/*/specifications/default/bundler-*.gemspec && \
     gem uninstall bundler && \
-    gem install bundler -v $BUNDLER_VERSION && \
-    bundler -v
+    gem install bundler -v $BUNDLER_VERSION --default 
 
 # Create a directory for the app code
 RUN mkdir -p /myapp
