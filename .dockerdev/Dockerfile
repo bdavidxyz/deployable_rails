@@ -1,6 +1,7 @@
 ARG RUBY_VERSION
 FROM ruby:$RUBY_VERSION-slim-buster
 
+ARG RAILS_VERSION
 ARG PG_MAJOR
 ARG NODE_MAJOR
 ARG BUNDLER_VERSION
@@ -52,8 +53,8 @@ ENV LANG=C.UTF-8 \
 # specific version of bundler
 RUN gem install bundler -v $BUNDLER_VERSION
 
-# specific version of Rails
-# RUN gem install rails -v 6.0.2.2
+# specific version of Rails, do not works...
+# RUN gem install rails -v $RAILS_VERSION
 
 # Create a directory for the app code
 RUN mkdir -p /myapp

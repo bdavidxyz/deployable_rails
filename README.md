@@ -6,4 +6,4 @@ build with `docker-compose build`
 
 run with `docker-compose run --rm runner`
 
-install rails app 
+install rails app See https://stackoverflow.com/a/33530471/2595513
