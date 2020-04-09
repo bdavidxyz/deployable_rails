@@ -29,6 +29,7 @@ x-backend: &backend
     - packs:/app/public/packs
     - .dockerdev/.psqlrc:/root/.psqlrc:ro
     - .dockerdev/.bashrc:/root/.bashrc:ro
+    - .dockerdev/.railsrc:/root/.railsrc:ro
   environment:
     <<: *env
     REDIS_URL: redis://redis:6379/
