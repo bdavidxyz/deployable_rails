@@ -1,0 +1,12 @@
+# This options will tell the "rails new" command to avoid the "bundle install" command
+# that automatically follows files and directories creation.
+# It also skip "webpack-install" that relies on "bundle install"
+
+# "rails new" has a weakness : it tries to run "bundle install" with the default 
+# version of bundler shipped with Ruby.
+
+# 1) this leads to a "rails new" command that fails
+# 2) This is a very bad thing,  if you want to use a 
+#    centralized, unified, docker-defined version of bundler.
+
+--skip-bundle --skip-webpack-install -d=postgresql
