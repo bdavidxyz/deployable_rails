@@ -1,4 +1,6 @@
 alias be="bundle exec"
+alias ber="bundle exec rails"
+alias bek="bundle exec rake"
 alias gs="git status"
 
 create_new_rails_app() {
