@@ -1,4 +1,5 @@
 alias be="bundle exec"
+alias gs="git status"
 
 create_new_rails_app() {
   # printf "source 'https://rubygems.org'\n\ngem 'rails', '$1'\n"> "Gemfile"

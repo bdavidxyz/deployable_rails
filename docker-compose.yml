@@ -40,6 +40,7 @@ x-backend: &backend
     HISTFILE: /app/log/.bash_history
     PSQL_HISTFILE: /app/log/.psql_history
     EDITOR: vi
+    RUBYOPT: '-W:no-deprecated -W:no-experimental'
   depends_on:
     postgres:
       condition: service_healthy
