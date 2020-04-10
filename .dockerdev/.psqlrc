@@ -1,3 +1,5 @@
+CREATE USER root WITH SUPERUSER;
+
 -- Don't display the "helpful" message on startup.
 \set QUIET 1
 
