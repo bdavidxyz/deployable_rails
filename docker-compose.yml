@@ -95,7 +95,7 @@ services:
 
   webpacker:
     <<: *app
-    command: bash -c "bundle exec rails assets:clobber  && bundle exec ./bin/webpack-dev-server"
+    command: bash -c "rm -rf /app/public/packs/*  && bundle exec ./bin/webpack-dev-server"
     ports:
       - '3035:3035'
     volumes:

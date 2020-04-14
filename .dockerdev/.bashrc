@@ -16,8 +16,8 @@ create_demo_page() {
   printf "class ${1^}Controller < ApplicationController\nend" > app/controllers/$1_controller.rb
   echo -e "added an empty \e[32mapp/controllers/$1_controller.rb\e[0m"
   mkdir "app/views/$1s"
-  printf "<%%= javascript_pack_tag '$1' %%>\n<%%= stylesheet_pack_tag '$1' %%>\n<h1>${1^}</h1>\n" > app/views/$1s/index.html.erb
-  echo -e "added simple view under app/views/$1s/index.html.erb"
+  printf "<%%= javascript_pack_tag '$1' %%>\n<%%= stylesheet_pack_tag '$1' %%>\n<h1>${1^}</h1>\n" > app/views/$1/index.html.erb
+  echo -e "added simple view under app/views/$1/index.html.erb"
 }
 
 # Usage : use the function, followed by the Rails version number. Example :
