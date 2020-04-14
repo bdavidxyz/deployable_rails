@@ -8,15 +8,14 @@ alias gs="git status"
 # create_demo_page calendar
 #
 create_demo_page() {
-  echo ${1^}
   awk '/Rails.application.routes.draw do/ { print; print "  get \x27'''/$1'''\x27, to: \x27'''$1#index'''\x27"; next }1' config/routes.rb > config/tmp && mv config/tmp config/routes.rb
   echo -e "added \e[32m'get /$1'\e[0m route under \e[32mconfig/routes.rb\e[0m"
   printf "console.log('$1 loaded')\n" > app/javascript/packs/$1.js
   echo -e "added a very simple \e[32mapp/javascript/packs/$1.js\e[0m"
   printf "class ${1^}Controller < ApplicationController\nend" > app/controllers/$1_controller.rb
   echo -e "added an empty \e[32mapp/controllers/$1_controller.rb\e[0m"
-  mkdir "app/views/$1s"
-  printf "<%%= javascript_pack_tag '$1' %%>\n<%%= stylesheet_pack_tag '$1' %%>\n<h1>${1^}</h1>\n" > app/views/$1/index.html.erb
+  mkdir "app/views/$1"
+  printf "<%%= javascript_pack_tag '$1' %%>\n<h1>${1^}</h1>\n" > app/views/$1/index.html.erb
   echo -e "added simple view under app/views/$1/index.html.erb"
 }
 
