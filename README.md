@@ -8,9 +8,13 @@ $> docker-compose run --rm runner
 root@0c0e5a712d21:/app# create_new_rails_app 6.0.2.2
 ```
 in another terminal type
-
 ```
 dcr -p 127.0.0.1:3000:3000 rails 
+```
+
+in another terminal type
+```
+dcr webpacker
 ```
 
 ## Restart from scratch
