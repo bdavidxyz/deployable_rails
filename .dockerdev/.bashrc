@@ -44,6 +44,8 @@ create_new_rails_app() {
   # HACK : replace check_yarn_integrity true to false to avoid weird yarn behaviour
   # Simply adds "check_yarn_integrity: false" to the config/webpacker.yml
   sed -i.bak 's/check_yarn_integrity: true/check_yarn_integrity: false/g' config/webpacker.yml
+  # WEBPACKER : : map host to the one provided by the docker service
+  sed -i.bak 's/host: localhost/host: webpacker/g' config/webpacker.yml
 
   # DOCKER : map database host to the one provided by the docker service
   # Simply adds "host: postgres" to the config/database.yml
