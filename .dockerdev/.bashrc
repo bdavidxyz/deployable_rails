@@ -9,7 +9,10 @@ alias gs="git status"
 #
 create_demo_page() {
   awk '/Rails.application.routes.draw do/ { print; print "  get \x27'''/$1'''\x27, to: \x27'''$1#index'''\x27"; next }1' config/routes.rb > config/tmp && mv config/tmp config/routes.rb
-
+  echo -e "added \e[32m'get /$1'\e[0m route under \e[32mconfig/routes.rb\e[0m"
+  printf "console.log('$1 loaded')\n" > app/javascript/packs/$1.js
+  echo -e "added a very simple \e[32mapp/javascript/packs/$1.js\e[0m"
+  # echo 'added a very simple app/javascript/packs/"$1".js'
 }
 
 # Usage : use the function, followed by the Rails version number. Example :
