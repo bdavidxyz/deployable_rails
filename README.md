@@ -6,6 +6,7 @@
 $> docker-compose build
 $> docker-compose run --rm runner
 root@0c0e5a712d21:/app# create_new_rails_app 6.0.2.2
+root@0c0e5a712d21:/app# be rails g controller hello say_hello
 ```
 in another terminal type
 ```

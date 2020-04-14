@@ -3,6 +3,19 @@ alias ber="bundle exec rails"
 alias bek="bundle exec rake"
 alias gs="git status"
 
+# Usage : use the function, followed by the name of the component
+#
+# create_demo_page calendar
+#
+create_demo_page() {
+  awk '/Rails.application.routes.draw do/ { print; print "  get \x27'''/$1'''\x27, to: \x27'''$1#index'''\x27"; next }1' config/routes.rb > config/tmp && mv config/tmp config/routes.rb
+
+}
+
+# Usage : use the function, followed by the Rails version number. Example :
+#
+# create_new_rails_app 6.0.2.2
+#
 create_new_rails_app() {
 
   # It will install in the "bundle" path the rails with supplied version
