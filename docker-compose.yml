@@ -57,7 +57,7 @@ services:
 
   rails:
     <<: *backend
-    command: rm /app/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0
+    command: bash -c "if [ -f /app/tmp/pids/server.pid ]; then rm /app/tmp/pids/server.pid;fi && bundle exec rails server -b 0.0.0.0"
     ports:
       - '3000:3000'
 
