@@ -29,6 +29,7 @@ x-backend: &backend
     - .dockerdev/.psqlrc:/root/.psqlrc:ro
     - .dockerdev/.bashrc:/root/.bashrc:ro
     - .dockerdev/.railsrc:/root/.railsrc:ro
+    - packs:/app/public/packs
   environment:
     <<: *env
     REDIS_URL: redis://redis:6379/
@@ -94,18 +95,20 @@ services:
 
   webpacker:
     <<: *app
-    command: bash -c "bundle exec rails assets:clobber && bundle exec ./bin/webpack-dev-server"
+    command: bash -c "rm -rf /app/public/packs && bundle exec ./bin/webpack-dev-server"
     ports:
       - '3035:3035'
     volumes:
       - .:/app:cached
       - bundle:/usr/local/bundle
       - node_modules:/app/node_modules
+      - packs:/app/public/packs
     environment:
       <<: *env
       WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
 
 volumes:
+  packs:
   postgres:
   redis:
   bundle:
