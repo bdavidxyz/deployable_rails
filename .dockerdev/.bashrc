@@ -4,6 +4,8 @@ alias bek="bundle exec rake"
 alias gs="git status"
 
 create_new_rails_app() {
+
+  # It will install in the "bundle" path the rails with supplied version
   gem install rails -v "$1"
 
   # Skip bundle,  since "rails new" will rely on internal ruby bundler
