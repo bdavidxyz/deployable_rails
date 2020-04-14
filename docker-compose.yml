@@ -57,7 +57,7 @@ services:
 
   rails:
     <<: *backend
-    command: bundle exec rails server -b 0.0.0.0
+    command: rm /myapp/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0
     ports:
       - '3000:3000'
 
@@ -95,7 +95,7 @@ services:
 
   webpacker:
     <<: *app
-    command: bundle exec ./bin/webpack-dev-server
+    command: rm -rf /app/public/packs && bundle exec ./bin/webpack-dev-server
     ports:
       - '3035:3035'
     volumes:
