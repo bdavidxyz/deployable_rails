@@ -45,7 +45,7 @@ create_new_rails_app() {
   # Use postgresql so that we rely on only one kind of database on all environments.
   #
   # Skip webpack-install since it relies on wrong bundler
-  rails new . --skip --skip-bundle --skip-webpack-install --skip-sprockets --database=postgresql 
+  rails new . --skip --skip-bundle --skip-webpack-install --database=postgresql 
 
   # bundle everything with the correct bundler (defined in Docker)
   bundle install
