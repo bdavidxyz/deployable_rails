@@ -5,11 +5,11 @@ x-app: &app
     context: .
     dockerfile: ./.dockerdev/Dockerfile
     args:
-      RUBY_VERSION: '2.7.0'
-      PG_MAJOR: '12'
-      NODE_MAJOR: '12'
-      YARN_VERSION: '1.22.4'
-      BUNDLER_VERSION: '2.0.2'
+      RUBY_VERSION: "${RUBY_VERSION}"
+      PG_MAJOR: "${PG_MAJOR}"
+      NODE_MAJOR: "${NODE_MAJOR}"
+      YARN_VERSION: "${YARN_VERSION}"
+      BUNDLER_VERSION: "${BUNDLER_VERSION}"
   environment: &env
     NODE_ENV: development
     RAILS_ENV: ${RAILS_ENV:-development}
@@ -59,20 +59,19 @@ services:
     <<: *backend
     command: bash -c "if [ -f /app/tmp/pids/server.pid ]; then rm /app/tmp/pids/server.pid;fi && bundle exec rails server -b 0.0.0.0"
     ports:
-      - '3000:3000'
+      - '127.0.0.1:3000:3000'
 
   sidekiq:
     <<: *backend
     command: bundle exec sidekiq -C config/sidekiq.yml
 
   postgres:
-    image: postgres:12.1
+    image: "postgres:${PG_MAJOR}"
     volumes:
       - .dockerdev/.psqlrc:/root/.psqlrc:ro
       - postgres:/var/lib/postgresql/data
       - ./log:/root/log:cached
       - '.dockerdev/init.sql:/docker-entrypoint-initdb.d/init.sql'
-      
     environment:
       PSQL_HISTFILE: /root/log/.psql_history
     ports:
@@ -95,9 +94,9 @@ services:
 
   webpacker:
     <<: *app
-    command: bash -c "rm -rf /app/public/packs && bundle exec ./bin/webpack-dev-server"
+    command: bash -c "rm -rf /app/public/packs/* && bundle exec ./bin/webpack-dev-server"
     ports:
-      - '3035:3035'
+      - '127.0.0.1:3035:3035'
     volumes:
       - .:/app:cached
       - bundle:/usr/local/bundle
