@@ -81,7 +81,7 @@ services:
       interval: 5s
 
   redis:
-    image: redis:"${REDIS_VERSION}"-alpine
+    image: "redis:${REDIS_VERSION}-alpine"
     volumes:
       - redis:/data
     ports:
